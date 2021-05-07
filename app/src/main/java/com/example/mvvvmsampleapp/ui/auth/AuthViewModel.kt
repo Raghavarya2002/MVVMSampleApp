@@ -2,6 +2,7 @@ package com.example.mvvvmsampleapp.ui.auth
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.example.mvvvmsampleapp.data.repositories.UserRepository
 
 class AuthViewModel : ViewModel() {
 
@@ -19,8 +20,9 @@ class AuthViewModel : ViewModel() {
             return
         }
 
-        //success
-        authListener?.onSuccess()
+        val loginResponse = UserRepository().userLogin(email!! , password!!)
+        authListener?.onSuccess(loginResponse)
+
 
 
 
