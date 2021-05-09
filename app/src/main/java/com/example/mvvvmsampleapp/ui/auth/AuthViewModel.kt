@@ -27,6 +27,14 @@ class AuthViewModel : ViewModel() {
 
 
                 val authResponse = UserRepository().userLogin(email!!, password!!)
+
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+
+
             } catch (e: ApiExceptions) {
                 authListener?.onFailure(e.message!!)
             }
