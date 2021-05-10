@@ -14,12 +14,21 @@ import retrofit2.http.POST
 interface MyApi {
     @FormUrlEncoded
     @POST("login")
-
     suspend fun userLogin( // A suspending function is simply a function that can be  paused and resumed at a later time , so these type of function can execute a long running operation and wait for it to complete without blocking.
         @Field("email") email: String,
         @Field("password") password: String
 
     ): Response<AuthResponse>
+
+
+    @FormUrlEncoded
+    @POST("signup")
+    suspend fun userSignup(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
 
     companion object {
         operator fun invoke(
