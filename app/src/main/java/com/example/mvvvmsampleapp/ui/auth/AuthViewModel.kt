@@ -21,22 +21,17 @@ class AuthViewModel(
 
     fun getLoggedInUser() = repository.getUser()
 
-
     fun onLoginButtonClick(view: View) {
         authListener?.onStarted()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
             authListener?.onFailure("Invalid Credentials")
-
 
             return
         }
 
         Coroutines.main {
             try {
-
-
                 val authResponse = repository.userLogin(email!!, password!!)
-
                 authResponse.user?.let {
                     authListener?.onSuccess(it)
                     repository.saveUser(it)
@@ -44,14 +39,11 @@ class AuthViewModel(
                 }
                 authListener?.onFailure(authResponse.message!!)
 
-
             } catch (e: ApiExceptions) {
                 authListener?.onFailure(e.message!!)
             } catch (e: NoInternetException) {
                 authListener?.onFailure(e.message!!)
             }
-
-
         }
 
 
@@ -94,10 +86,7 @@ class AuthViewModel(
 
         Coroutines.main {
             try {
-
-
                 val authResponse = repository.userSignup(name!!, email!!, password!!)
-
                 authResponse.user?.let {
                     authListener?.onSuccess(it)
                     repository.saveUser(it)
@@ -111,11 +100,7 @@ class AuthViewModel(
             } catch (e: NoInternetException) {
                 authListener?.onFailure(e.message!!)
             }
-
-
         }
-
-
     }
 
 }
