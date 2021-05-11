@@ -7,13 +7,13 @@ import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 
 
-fun Context.toast(message:String){
+fun Context.toast(message: String) {
 
-    Toast.makeText(this , message , Toast.LENGTH_LONG).show()
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 }
 
-fun ProgressBar.show(){
+fun ProgressBar.show() {
     visibility = View.VISIBLE
 }
 
