@@ -35,7 +35,7 @@ class QuotesFragment : Fragment(), KodeinAware {
 
         Coroutines.main {
             val quotes = viewModel.quotes.await()
-            quotes.observe(this, Observer {
+            quotes.observe(viewLifecycleOwner, Observer {
                 context?.toast(it.size.toString())
             })
 
