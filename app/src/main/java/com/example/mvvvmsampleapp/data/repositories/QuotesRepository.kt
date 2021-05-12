@@ -1,15 +1,20 @@
 package com.example.mvvvmsampleapp.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvvmsampleapp.data.db.AppDatabase
 import com.example.mvvvmsampleapp.data.db.entities.Quote
 import com.example.mvvvmsampleapp.data.network.MyApi
+import com.example.mvvvmsampleapp.data.network.SafeApiRequest
+import com.example.mvvvmsampleapp.util.Coroutines
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class QuotesRepository(
 
     private val api: MyApi,
     private val db: AppDatabase
-) {
+) : SafeApiRequest() {
 
     private val quotes = MutableLiveData<List<Quote>>()
 
@@ -19,7 +24,35 @@ class QuotesRepository(
         }
     }
 
+    suspend fun getQuotes(): LiveData<List<Quote>> {
+
+        return withContext(Dispatchers.IO) {
+            fetchQuotes()
+            db.getQuoteDao().getQuotes()
+        }
+    }
+
+    private suspend fun fetchQuotes() {  //fetch the quotes from backend API
+
+        if (isFetchNeeded()) {
+
+            val response = apiRequest { api.getQuotes() }
+            quotes.postValue(response.quotes)
+
+        }
+
+    }
+
+    private fun isFetchNeeded(): Boolean {
+
+        return true
+    }
+
     private fun saveQuotes(quotes: List<Quote>) {
+
+        Coroutines.io {
+            db.getQuoteDao().saveAllQuotes(quotes)
+        }
 
     }
 
