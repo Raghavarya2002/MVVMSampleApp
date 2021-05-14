@@ -3,14 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
 
-        <variable
-            name="viewmodel"
-            type="com.example.mvvvmsampleapp.ui.auth.AuthViewModel" />
-
-
-    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root_layout"
@@ -18,7 +11,6 @@
         android:layout_height="match_parent"
         android:background="#E2E2E2"
         tools:context=".ui.auth.LoginActivity">
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,8 +74,7 @@
                     android:drawablePadding="16dp"
                     android:hint="rags@gmail.com"
                     android:inputType="textEmailAddress"
-                    android:padding="12dp"
-                    android:text="@={viewmodel.email}" />
+                    android:padding="12dp" />
 
                 <EditText
 
@@ -96,8 +87,7 @@
                     android:drawablePadding="16dp"
                     android:hint="password"
                     android:inputType="textPassword"
-                    android:padding="12dp"
-                    android:text="@={viewmodel.password}" />
+                    android:padding="12dp" />
 
                 <TextView
                     android:id="@+id/text_view_forget_password"
@@ -113,7 +103,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:onClick="@{viewmodel::onLoginButtonClick}"
+
                     android:text="Sign In"
                     android:textAllCaps="false" />
 
@@ -126,7 +116,7 @@
                 android:layout_below="@id/linearLayout2"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="12dp"
-                android:onClick="@{viewmodel::onSignup}"
+
                 android:text="Don't have an account?\nSign Up Here"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
