@@ -49,6 +49,11 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
             loginUser()
         }
 
+        binding.textViewSignUp.setOnClickListener {
+
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
     }
 
     private fun loginUser() {
@@ -61,18 +66,10 @@ class LoginActivity : AppCompatActivity(), KodeinAware {
 
                 val authResponse = viewModel.userLogin(email, password)
                 if (authResponse.user != null) {
-
-
                     viewModel.saveLoggedInUser(authResponse.user)
-
-
                 } else {
-
                     binding.rootLayout.snackbar(authResponse.message!!)
-
                 }
-
-
             } catch (e: ApiExceptions) {
                 e.printStackTrace()
 
