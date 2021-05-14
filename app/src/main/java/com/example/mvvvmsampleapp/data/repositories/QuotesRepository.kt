@@ -14,6 +14,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 private val MINIMUM_INTERVAL = 6
+
 class QuotesRepository(
 
     private val api: MyApi,
