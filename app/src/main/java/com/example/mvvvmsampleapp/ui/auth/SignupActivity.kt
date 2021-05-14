@@ -62,27 +62,16 @@ class SignupActivity : AppCompatActivity(), KodeinAware {
         lifecycleScope.launch {
             val authResponse = viewModel.userSignup(name, email, password)
             try {
-
                 val authResponse = viewModel.userSignup(name, email, password)
                 if (authResponse.user != null) {
-
-
                     viewModel.saveLoggedInUser(authResponse.user)
-
-
                 } else {
-
                     binding.root.snackbar(authResponse.message!!)
-
                 }
-
-
             } catch (e: ApiExceptions) {
                 e.printStackTrace()
-
             } catch (e: NoInternetException) {
                 e.printStackTrace()
-
             }
 
         }
